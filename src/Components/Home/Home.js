@@ -4,7 +4,7 @@ import Banner from './Banner';
 import Featured from './Featured';
 
 export default () => (
-  <div>
+  <div id="page-wrapper">
     <Banner/>
     <Featured/>
     <div className="wrapper wrapper-style1">
