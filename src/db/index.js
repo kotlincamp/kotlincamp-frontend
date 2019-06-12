@@ -1,19 +1,15 @@
-import db from './db';
+ const db = require('./db');
 
 const getFeaturedItems = async () => {
+  let collection = db.collection('featured-items')
   let featuredArray = [];
-  try {
-    let featuredObj = await db.collection('featured-items').get();
-    featuredObj.forEach(feature => {
-      let temp = feature.data();
-      temp.id = feature.id;
-      featuredArray.push(temp);
+  return await collection.get().then((querySnapshot => {
+    querySnapshot.forEach(doc => {
+      let temp = doc.data()
+      temp.id = doc.id
+      featuredArray.push(temp)
     })
-  } catch (e) {
-    console.error('error retrieving featured content', e);
-  } finally {
-    return featuredArray;
-  }
+  })).then(() => featuredArray);
 }
 
 const getHeaderImages = async () => {
@@ -72,4 +68,6 @@ const addContact = async contact => {
   }
 }
 
-export default { getFeaturedItems, addContact, getCurriculum, getTeamMembers, getHeaderImages }
+console.log(getFeaturedItems())
+
+module.exports = { getFeaturedItems, addContact, getCurriculum, getTeamMembers, getHeaderImages }

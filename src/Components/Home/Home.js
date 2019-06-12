@@ -7,28 +7,15 @@ export default () => (
   <div id="page-wrapper">
     <Banner/>
     <Featured/>
-    <div className="wrapper wrapper-style1">
-      <div className="container">
-        <section>
-          <img src="images/pic02.jpg" alt="" className="image right"/>
-          <header>
-            <h2>What we're about...</h2>
-            <span className="byline">Creating a pathway to tech this is accessible to anyone with a computer.</span>
-          </header>
-          <p>We are a community-oriented coding program and pathway to careers in technology with an emphasis on underrepresented groups.</p>
-        </section>
-      </div>
-    </div>
     <div className="wrapper wrapper-style2">
       <div className="container">
         <section>
           <img src="images/pic03.jpg" alt="" className="image left"/>
           <div className="content">
             <header>
-              <h2>Commodo et sapien</h2>
-              <span className="byline">Ipsum dolor sit amet nullam tincidunt lorem</span>
+              <h2>What we're about...</h2>
+              <span className="byline">We are a community-oriented coding program and pathway to careers in technology with an emphasis on underrepresented groups.</span>
             </header>
-            <p>Accumsan diam rutrum porta justo tincidunt cum aliquam. Consectetur malesuada iaculis scelerisque pellentesque commodo suscipit iaculis magna cras sapien eget praesent. Libero etiam etiam fringilla felis dignissim nullam ligula dolor rutrum eget.</p>
           </div>
         </section>
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getFeaturedItems from '../../db/';
+import { getFeaturedItems } from '../../db/';
 
 export default class Featured extends Component {
   constructor(props){
@@ -8,30 +8,36 @@ export default class Featured extends Component {
       featured: []
     }
   }
-  async componentDidRender(){
+  async componentDidMount(){
     try {
-      this.setState({ featured: await getFeaturedItems()});
+      let featured = await getFeaturedItems()
+      this.setState({ featured: featured });
     } catch (e) {
       console.error('error getting featured items', e);
     }
   }
   render(){
     let { featured } = this.state;
+    // console.log(this.state);
     return (
       <div>
-      {featured.map(feature => (
         <div className="wrapper wrapper-style1">
           <div className="container">
-            <section>
-              <i className={feature['font-awesome-class']}></i>
-              <header>
-                <h2>{feature.title}</h2>
-              </header>
-              <p>{feature.description}</p>
-            </section>
+            <div className="row">
+              {featured.map(feature => (
+                <div key={feature.id} className="col-4 col-12-mobile">
+                    <section>
+                      <i className={feature['font-awesome-class'] + ' fa-2x'}></i>
+                      <header>
+                        <h2>{feature.title}</h2>
+                      </header>
+                      <p>{feature.description}</p>
+                    </section>
+                  </div>
+              ))}
+            </div>
           </div>
         </div>
-      ))}
       </div>
     )
   }
