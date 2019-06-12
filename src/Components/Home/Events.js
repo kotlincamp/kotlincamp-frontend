@@ -19,7 +19,6 @@ export default class Events extends Component {
   }
   render(){
     let { events } = this.state;
-    console.log('events: ' + events);
     return (
       <div id="content" className="col-8 col-12-mobile">
         <section>
