@@ -68,6 +68,16 @@ const addContact = async contact => {
   }
 }
 
-console.log(getFeaturedItems())
+const getEvents = async () => {
+  let collection = db.collection('events')
+  let eventsArray = [];
+  return await collection.get().then((querySnapshot => {
+    querySnapshot.forEach(doc => {
+      let temp = doc.data()
+      temp.id = doc.id
+      eventsArray.push(temp)
+    })
+  })).then(() => eventsArray);
+}
 
-module.exports = { getFeaturedItems, addContact, getCurriculum, getTeamMembers, getHeaderImages }
+module.exports = { getFeaturedItems, addContact, getCurriculum, getTeamMembers, getHeaderImages, getEvents }
