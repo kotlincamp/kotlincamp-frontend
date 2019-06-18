@@ -62,7 +62,7 @@ const getCurriculum = async () => {
 
 const addContact = async contact => {
   try {
-    await db.collection('contacts').add(contact)
+    return await db.collection('contacts').add(contact)
   } catch (e) {
     console.error('Error adding contact to database: ', e);
   }
@@ -71,13 +71,32 @@ const addContact = async contact => {
 const getEvents = async () => {
   let collection = db.collection('events')
   let eventsArray = [];
-  return await collection.get().then((querySnapshot => {
-    querySnapshot.forEach(doc => {
-      let temp = doc.data()
-      temp.id = doc.id
-      eventsArray.push(temp)
-    })
-  })).then(() => eventsArray);
+  try {
+    return await collection.get().then((querySnapshot => {
+      querySnapshot.forEach(event => {
+        let temp = event.data()
+        temp.id = event.id
+        eventsArray.push(temp)
+      })
+    })).then(() => eventsArray)
+  } catch (e) {
+    console.error('error fetching events', e);
+  } finally {
+    return eventsArray
+  }
 }
 
-module.exports = { getFeaturedItems, addContact, getCurriculum, getTeamMembers, getHeaderImages, getEvents }
+const getSiteInfo = async () => {
+  let docRef = db.collection('site-info').doc('main')
+  try {
+    return await docRef.get().then(doc => {
+      let { title, mission, image } = doc.data()
+      return { title: title, mission: mission, image: image }
+    })
+  } catch (e) {
+    console.error('error retrieving site info', e);
+    return { title: '', mission: '', image: '' }
+  }
+}
+
+export { getFeaturedItems, addContact, getCurriculum, getTeamMembers, getHeaderImages, getEvents, getSiteInfo }

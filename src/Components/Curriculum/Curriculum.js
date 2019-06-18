@@ -1,5 +1,8 @@
 import React from 'react';
 
-const Curriculum = () => "Curriculum";
+const Curriculum = () => (
+  <div>
+  </div>
+);
 
 export default Curriculum;

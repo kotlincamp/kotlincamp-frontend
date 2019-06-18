@@ -2,6 +2,7 @@ import React from 'react';
 import Events from './Events';
 import Banner from './Banner';
 import Featured from './Featured';
+import Sidebar from './Sidebar';
 
 export default () => (
   <div id="page-wrapper">
@@ -25,13 +26,7 @@ export default () => (
         <div className="row">
           <Events/>
           <div id="sidebar" className="col-4 col-12-mobile">
-            <section>
-              <header>
-                <h2>Magna tempus etiam</h2>
-              </header>
-              <img src="images/pic04.jpg" alt="" className="image featured"/>
-              <p>Lorem ipsum dolor sit amet, consecetuer adipiscing elit. Phasellus hendrerit. Lorem ipsum dolor sit amet, consecetuer adipiscing elit.</p>
-            </section>
+            <Sidebar />
           </div>
         </div>
       </div>

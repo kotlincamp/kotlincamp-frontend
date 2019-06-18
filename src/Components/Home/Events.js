@@ -11,11 +11,31 @@ export default class Events extends Component {
   }
   async componentDidMount(){
     let events = await getEvents()
-    this.setState({events: events})
+    console.log(this.filterEvents(events));
+    this.setState({events: this.reorderEvents(events)})
   }
-  getMonthAbbrev(date){
+  filterEvents(events){
+    let filteredEvents = []
+    let currentDate = new Date()
+    console.log("Current Date:", currentDate);
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    return months[date.getMonth()]
+    try {
+      filteredEvents = events.filter(event => new Date(event.year, months.indexOf(event['month-abbrev']), event.day) > currentDate)
+    } catch (e) {
+      console.error("Error filtering events", e);
+    } finally {
+      return filteredEvents
+    }
+  }
+  reorderEvents(events){
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    events = this.filterEvents(events)
+    events = events.sort((a, b) => {
+      a.date = new Date(a.year, months.indexOf(a['month-abbrev']), a.day)
+      b.date = new Date(b.year, months.indexOf(b['month-abbrev']), b.day)
+      return a > b ? 1 : a < b ? -1 : 0;
+    })
+    return events
   }
   render(){
     let { events } = this.state;
@@ -28,13 +48,13 @@ export default class Events extends Component {
           <ul className="style3">
           {events.map(event => {
             return event === events[0] ? (<li key={event.id}>
-              <p className="date"><a href={event.link}>{event['month-abbrev']}<b>{event.day}</b></a></p>
+              <p className="date"><a href={event.link} target="_blank"  rel="noopener noreferrer">{event['month-abbrev']}<b>{event.day}</b></a></p>
               <h3>{event.name}</h3>
               <p><a href={event.link}>{event.synopsis}</a></p>
             </li>) : (<li className="first" key={event.id}>
-              <p className="date"><a href={event.link}>{event['month-abbrev']}<b>{event.day}</b></a></p>
+              <p className="date"><a href={event.link}  target="_blank"  rel="noopener noreferrer">{event['month-abbrev']}<b>{event.day}</b></a></p>
               <h3>{event.name}</h3>
-              <p><a href={event.link}>{event.synopsis}</a></p>
+              <p><a href={event.link} target="_blank"  rel="noopener noreferrer">{event.synopsis}</a></p>
             </li>);
           })}
           </ul>
