@@ -12,6 +12,7 @@ class Contact extends Component {
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.clearForm = this.clearForm.bind(this)
   }
   async handleInputChange(e){
     let { name, value } = e.target;
@@ -28,12 +29,11 @@ class Contact extends Component {
     this.props.history.push('/')
   }
   clearForm(e){
-    console.log(this);
     e.preventDefault()
     this.setState({
-      "name": null,
-      "email": null,
-      "message": null
+      "name": "",
+      "email": "",
+      "message": ""
     })
   }
   render(){
@@ -51,13 +51,13 @@ class Contact extends Component {
                 <form onSubmit={handleSubmit}>
                   <div className="row gtr-50">
                     <div className="col-6 col-12-mobile">
-                      <input type="text" onChange={handleInputChange} name="name" id="name" placeholder="Name" value={name} />
+                      <input type="text" onChange={handleInputChange} name="name" id="name" placeholder="Name" value={this.state.name} />
                     </div>
                     <div className="col-6 col-12-mobile">
-                      <input type="text" onChange={handleInputChange} name="email" id="email" placeholder="Email" value={email} />
+                      <input type="text" onChange={handleInputChange} name="email" id="email" placeholder="Email" value={this.state.email} />
                     </div>
                     <div className="col-12">
-                      <textarea name="message" onChange={handleInputChange} id="message" placeholder="Message" value={message} ></textarea>
+                      <textarea name="message" onChange={handleInputChange} id="message" placeholder="Message" value={this.state.message} ></textarea>
                     </div>
                     <div className="col-12">
                       <button type="submit" className="button">Send Message</button>

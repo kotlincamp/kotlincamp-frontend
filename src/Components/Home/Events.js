@@ -11,13 +11,11 @@ export default class Events extends Component {
   }
   async componentDidMount(){
     let events = await getEvents()
-    console.log(this.filterEvents(events));
     this.setState({events: this.reorderEvents(events)})
   }
   filterEvents(events){
     let filteredEvents = []
     let currentDate = new Date()
-    console.log("Current Date:", currentDate);
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     try {
       filteredEvents = events.filter(event => new Date(event.year, months.indexOf(event['month-abbrev']), event.day) > currentDate)
