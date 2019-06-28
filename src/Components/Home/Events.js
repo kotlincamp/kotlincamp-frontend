@@ -14,14 +14,14 @@ export default class Events extends Component {
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
-  componentWillUnmount(){
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  }
   async componentDidMount(){
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     let events = await getEvents()
     this.setState({events: this.reorderEvents(events)})
+  }
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
   filterEvents(events){
     let filteredEvents = []
@@ -41,7 +41,7 @@ export default class Events extends Component {
     events = events.sort((a, b) => {
       a.date = new Date(a.year, months.indexOf(a['month-abbrev']), a.day)
       b.date = new Date(b.year, months.indexOf(b['month-abbrev']), b.day)
-      return a > b ? -1 : a < b ? 1 : 0;
+      return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
     })
     return events
   }

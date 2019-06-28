@@ -5,8 +5,7 @@ export default class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      width: 0,
-      height: 0
+      width: 0
     }
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
   }
@@ -21,7 +20,7 @@ export default class Header extends Component {
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
   render(){
-    let { width, height } = this.state
+    let { width } = this.state
     return width > 840 ? (
       <div id="header">
         <div className="container">

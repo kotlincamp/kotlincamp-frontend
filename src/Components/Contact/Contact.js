@@ -78,10 +78,6 @@ class Contact extends Component {
                       San Francisco, CA 94133
                     </p>
                   </li>
-                  <li>
-                    <h3>Mail</h3>
-                    <p><a href="/">someone@untitled.tld</a></p>
-                  </li>
                 </ul>
               </section>
             </div>

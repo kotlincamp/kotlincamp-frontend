@@ -13,9 +13,6 @@ export default class Featured extends Component {
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
-  componentWillUnmount(){
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  }
   async componentDidMount(){
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
@@ -25,6 +22,9 @@ export default class Featured extends Component {
     } catch (e) {
       console.error('error getting featured items', e);
     }
+  }
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
   render(){
     let { featured, width } = this.state;
