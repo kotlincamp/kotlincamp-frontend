@@ -51,13 +51,13 @@ class Contact extends Component {
                 <form onSubmit={handleSubmit}>
                   <div className="row gtr-50">
                     <div className="col-6 col-12-mobile">
-                      <input type="text" onChange={handleInputChange} name="name" id="name" placeholder="Name" value={this.state.name} />
+                      <input type="text" onChange={handleInputChange} name="name" id="name" placeholder="Name" value={name} />
                     </div>
                     <div className="col-6 col-12-mobile">
-                      <input type="text" onChange={handleInputChange} name="email" id="email" placeholder="Email" value={this.state.email} />
+                      <input type="text" onChange={handleInputChange} name="email" id="email" placeholder="Email" value={email} />
                     </div>
                     <div className="col-12">
-                      <textarea name="message" onChange={handleInputChange} id="message" placeholder="Message" value={this.state.message} ></textarea>
+                      <textarea name="message" onChange={handleInputChange} id="message" placeholder="Message" value={message} ></textarea>
                     </div>
                     <div className="col-12">
                       <button type="submit" className="button">Send Message</button>

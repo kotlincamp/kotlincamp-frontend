@@ -1,5 +1,5 @@
-const firebase = require('firebase');
-require('firebase/firestore');
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 
 firebase.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
@@ -13,4 +13,4 @@ firebase.initializeApp({
 
 var db = firebase.firestore();
 
-module.exports = db;
+export default db;

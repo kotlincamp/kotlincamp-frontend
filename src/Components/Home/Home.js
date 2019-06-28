@@ -25,7 +25,7 @@ export default () => (
       <div className="container">
         <div className="row">
           <Events/>
-          <div id="sidebar" className="col-4 col-12-mobile">
+          <div id="sidebar" className="col-12">
             <Sidebar />
           </div>
         </div>

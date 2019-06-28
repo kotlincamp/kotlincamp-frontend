@@ -1,15 +1,20 @@
- const db = require('./db');
+import db from './db'
 
 const getFeaturedItems = async () => {
-  let collection = db.collection('featured-items')
   let featuredArray = [];
-  return await collection.get().then((querySnapshot => {
-    querySnapshot.forEach(doc => {
-      let temp = doc.data()
-      temp.id = doc.id
-      featuredArray.push(temp)
-    })
-  })).then(() => featuredArray);
+  try {
+    let collection = db.collection('featured-items')
+    return await collection.get().then((querySnapshot => {
+      querySnapshot.forEach(doc => {
+        let temp = doc.data()
+        temp.id = doc.id
+        featuredArray.push(temp)
+      })
+    })).then(() => featuredArray);
+  } catch (e) {
+    console.error('Error getting featured items from db', e);
+    return featuredArray
+  }
 }
 
 const getHeaderImages = async () => {
@@ -69,9 +74,9 @@ const addContact = async contact => {
 }
 
 const getEvents = async () => {
-  let collection = db.collection('events')
   let eventsArray = [];
   try {
+    let collection = db.collection('events')
     return await collection.get().then((querySnapshot => {
       querySnapshot.forEach(event => {
         let temp = event.data()
