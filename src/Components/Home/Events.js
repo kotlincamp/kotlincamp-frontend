@@ -26,9 +26,10 @@ export default class Events extends Component {
   filterEvents(events){
     let filteredEvents = []
     let currentDate = new Date()
+    currentDate.setHours(0, 0, 0, 0)
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     try {
-      filteredEvents = events.filter(event => new Date(event.year, months.indexOf(event['month-abbrev']), event.day) > currentDate)
+      filteredEvents = events.filter(event => new Date(event.year, months.indexOf(event['month-abbrev']), event.day, 1) > currentDate)
     } catch (e) {
       console.error("Error filtering events", e);
     } finally {
