@@ -79,13 +79,13 @@ class Header extends Component {
         <div className="container">
           <nav id="nav">
             <ul>
-              <Home/>
+              <li><Link to="/">Home</Link></li>
               <li>
                 <div id="logo">
                   <h1><Link to="/">Kotlin Camp</Link></h1>
                 </div>
               </li>
-              <Contact/>
+              <li><Link to="/contact/">Contact</Link></li>
             </ul>
           </nav>
         </div>
