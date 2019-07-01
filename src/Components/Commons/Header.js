@@ -1,26 +1,65 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      width: 0
+      width: 0,
+      home: () => (
+        <li className="current"><Link to="/">Home</Link></li>
+      ),
+      contact: () => (
+        <li><Link to="/contact/">Contact</Link></li>
+      )
+
     }
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
+    this.setHeaderLinks = this.setHeaderLinks.bind(this)
   }
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
+  setHeaderLinks(pathname){
+      pathname === undefined ? this.setState({
+        home: () => (
+          <li className="current"><Link to="/">Home</Link></li>
+        ),
+        contact: () => (
+          <li><Link to="/contact/">Contact</Link></li>
+        )}) :
+      pathname === '/' ? this.setState({
+        home: () => (
+          <li className="current"><Link to="/">Home</Link></li>
+        ),
+        contact: () => (
+          <li><Link to="/contact/">Contact</Link></li>
+        )}) :
+        this.setState({
+          home: () => (
+            <li><Link to="/">Home</Link></li>
+          ),
+          contact: () => (
+            <li className="current"><Link to="/contact/">Contact</Link></li>
+          ),
+        });
+  }
   componentDidMount(){
     this.updateWindowDimensions();
+    this.setHeaderLinks();
+    this.props.history.listen((location, action) => {
+      this.setHeaderLinks(location.pathname)
+    })
     window.addEventListener('resize', this.updateWindowDimensions);
   }
   componentWillUnmount(){
     window.removeEventListener('resize', this.updateWindowDimensions);
+    window.removeEventListener('popstate', this.setHeaderLinks);
   }
   render(){
-    let { width } = this.state
+    let { width, home, contact } = this.state
+    let Home = home
+    let Contact = contact
     return width > 840 ? (
       <div id="header">
         <div className="container">
@@ -29,8 +68,8 @@ export default class Header extends Component {
           </div>
           <nav id="nav">
             <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/contact/">Contact</Link></li>
+              <Home/>
+              <Contact/>
             </ul>
           </nav>
         </div>
@@ -40,13 +79,13 @@ export default class Header extends Component {
         <div className="container">
           <nav id="nav">
             <ul>
-              <li><Link to="/">Home</Link></li>
+              <Home/>
               <li>
                 <div id="logo">
                   <h1><Link to="/">Kotlin Camp</Link></h1>
                 </div>
               </li>
-              <li><Link to="/contact/">Contact</Link></li>
+              <Contact/>
             </ul>
           </nav>
         </div>
@@ -56,8 +95,8 @@ export default class Header extends Component {
         <div className="container">
           <nav id="nav">
             <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/contact/">Contact</Link></li>
+              <Home/>
+              <Contact/>
             </ul>
           </nav>
         </div>
@@ -65,3 +104,5 @@ export default class Header extends Component {
     )
   }
 }
+
+export default withRouter(Header)
