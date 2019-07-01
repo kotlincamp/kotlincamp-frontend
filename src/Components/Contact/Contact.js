@@ -60,8 +60,8 @@ class Contact extends Component {
                       <textarea name="message" onChange={handleInputChange} id="message" placeholder="Message" value={message} ></textarea>
                     </div>
                     <div className="col-12">
-                      <button type="submit" className="button">Send Message</button>
-                      <button onClick={clearForm} className="button alt">Clear Form</button>
+                      <button type="submit" className="button"> Send Message </button>
+                      <button onClick={clearForm} className="button alt"> Clear Form </button>
                     </div>
                   </div>
                 </form>
