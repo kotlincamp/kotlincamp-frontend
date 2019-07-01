@@ -11,7 +11,6 @@ export default () => (
     <div className="wrapper wrapper-style2">
       <div className="container">
         <section>
-          <img src="images/pic03.jpg" alt="" className="image left"/>
           <div className="content">
             <header>
               <h2>What we're about...</h2>
